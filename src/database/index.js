@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
+const config = require('../../config/config')
 
 async function connect() {
-  const db = 'bootcamp-testing';
-  const url = `mongodb://root:root@127.0.0.1:27017/${db}`;
   try {
-    await mongoose.connect(url, { authSource: 'admin' });
+    await mongoose.connect(config.dbUrl, { authSource: 'admin' });
   } catch (error) {
     console.log(error);
     throw new Error(error.message);
