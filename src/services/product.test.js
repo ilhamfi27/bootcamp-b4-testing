@@ -18,3 +18,15 @@ describe('.fetch()', () => {
     expect(res.message).toBe('data is empty');
   });
 });
+describe('.getOne()', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+  test('fetch one product', async () => {
+    jest.spyOn(Product, 'findOne').mockReturnValue(productFixtures[0]);
+    const res = await productSvc.getOne();
+    expect(res.name).toBe(productFixtures[0].name);
+    expect(res.price).toBe(productFixtures[0].price);
+    expect(res.stock).toBe(productFixtures[0].stock);
+  });
+});
