@@ -1,35 +1,23 @@
-const Product = require('../models/product');
+const productSvc = require('../services/product');
 
 async function fetch(req, res) {
-  const data = await Product.find({});
+  const data = await productSvc.fetch();
   res.send(data);
 }
 async function getOne(req, res) {
-  const id = req.params.id;
-  const data = await Product.findOne({ _id: id });
+  const data = await productSvc.getOne(req.params.id);
   res.send(data);
 }
 async function create(req, res) {
-  const body = req.body;
-  let product = new Product({ ...body });
-  product = await product.save();
+  const product = productSvc.create(req.body);
   res.send(product);
 }
 async function update(req, res) {
-  const id = req.params.id;
-  const body = req.body;
-  const data = await Product.findOneAndUpdate(
-    { _id: id },
-    { ...body },
-    {
-      replace: true,
-    }
-  );
+  const data = productSvc.update(req.body, req.params.id);
   res.send(data);
 }
 async function destroy(req, res) {
-  const id = req.params.id;
-  const data = await Product.findOneAndDelete({ _id: id });
+  const data = await productSvc.destroy(req.params.id);
   res.send(data);
 }
 
