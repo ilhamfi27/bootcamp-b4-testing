@@ -2,16 +2,20 @@ const Product = require('../models/product');
 
 async function fetch() {
   const data = await Product.find({});
-  return data
+  if (data.length) {
+    return data;
+  } else {
+    return { message: 'data is empty' };
+  }
 }
 async function getOne(id) {
   const data = await Product.findOne({ _id: id });
-  return data
+  return data;
 }
 async function create(body) {
   let product = new Product({ ...body });
   product = await product.save();
-  return product
+  return product;
 }
 async function update(body, id) {
   const data = await Product.findOneAndUpdate(
@@ -21,11 +25,11 @@ async function update(body, id) {
       replace: true,
     }
   );
-  return data
+  return data;
 }
 async function destroy(id) {
   const data = await Product.findOneAndDelete({ _id: id });
-  return data
+  return data;
 }
 
 module.exports = {
