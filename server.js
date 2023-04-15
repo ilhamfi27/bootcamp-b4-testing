@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const connectDB = require('./database');
-const errorHandling = require('./middleware/errorHandling');
+const connectDB = require('./src/database');
+const errorHandling = require('./src/middleware/errorHandling');
 
 const app = express();
 
@@ -12,7 +12,7 @@ connectDB()
 /**
  * routing
  */
-const routesApiV1 = require('./routes/v1routes');
+const routesApiV1 = require('./src/routes/v1routes');
 
 app.use('/api/v1', routesApiV1);
 app
